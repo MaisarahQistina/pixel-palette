@@ -17,13 +17,13 @@ body {
 }
 
 main {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(148, 62, 62, 0.05);
   border-radius: 15px;
   padding: 2rem;
   width: 90%;
   max-width: 700px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(234, 227, 227, 0.3);
 }
 
 .header h1 {
@@ -72,6 +72,22 @@ main {
 
 .hidden {
   display: none;
+}
+
+/* Slider */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  color: white;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 0.9rem;
+}
+
+#colorCount {
+  width: 150px;
 }
 
 /* Palette Section */

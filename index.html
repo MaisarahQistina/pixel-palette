@@ -13,7 +13,7 @@
   <main>
     <div class="header">
       <h1>Pixel Palette</h1>
-      <p>Upload an image to extract its main color palette</p>
+      <p>Upload an image to extract its main color palette.</p>
     </div>
 
     <div class="upload-section">
@@ -22,6 +22,12 @@
       </label>
       <input type="file" id="imageUpload" accept="image/*">
       <img id="preview" src="" alt="Image Preview" class="preview hidden">
+    </div>
+
+    <div class="controls">
+        <label for="colorCount">Number of Colors:</label>
+        <input type="range" id="colorCount" min="1" max="6" value="4">
+        <span id="colorValue"></span>
     </div>
 
     <div class="palette-section hidden" id="paletteSection">
