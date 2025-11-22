@@ -48,16 +48,22 @@ PixelPalette is a web-based color palette extractor that extracts the main color
 ### Installation & Running
 
 #### 1. Clone the repository
-git clone https://github.com/MaisarahQistina/pixel-palette.git <br>
+```bash
+git clone https://github.com/MaisarahQistina/pixel-palette.git 
 cd pixel-palette
+```
 
 #### 2. Create & activate a virtual environment (Optional)
 
 #### 3. Install dependencies
+```bash
 pip install flask numpy opencv-python scikit-learn pillow
+```
 
 #### 4. Run the Flask server
+```bash
 python app.py
+```
 
 #### 5. Open the web app in your browser
 Go to: http://127.0.0.1:5000/
