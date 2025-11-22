@@ -1,0 +1,136 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #df6722, #1f18a7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  color: white;
+}
+
+main {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  margin-top: -1rem;
+}
+
+.header p {
+  font-size: 1rem;
+  color: #f0f0f0;
+  margin-bottom: 3rem;
+}
+
+/* Upload Section */
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.upload-label {
+  background: #ffffff30;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.upload-label:hover {
+  background: #ffffff50;
+}
+
+#imageUpload {
+  display: none;
+}
+
+.preview {
+  margin-top: 1rem;
+  max-width: 100%;
+  border-radius: 10px;
+  border: 2px solid #ffffff50;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Palette Section */
+.palette-section h2 {
+  margin-bottom: 1rem;
+}
+
+.palette-strip {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #ffffff50;
+}
+
+.color-block {
+  flex: 1;
+  padding: 2rem 0;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-block:hover {
+  transform: scale(1.1);
+}
+
+.color-block span {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+/* Palette Actions */
+.palette-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.palette-actions button {
+  background: #ffffff30;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s;
+}
+
+.palette-actions button:hover {
+  background: #ffffff50;
+}

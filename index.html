@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PixelPalette</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- for icons -->
+</head>
+<body>
+  <main>
+    <div class="header">
+      <h1>Pixel Palette</h1>
+      <p>Upload an image to extract its main color palette</p>
+    </div>
+
+    <div class="upload-section">
+      <label for="imageUpload" class="upload-label">
+        <i class="fas fa-upload"></i> Choose an Image
+      </label>
+      <input type="file" id="imageUpload" accept="image/*">
+      <img id="preview" src="" alt="Image Preview" class="preview hidden">
+    </div>
+
+    <div class="palette-section hidden" id="paletteSection">
+      <h2>Extracted Palette</h2>
+      <div class="palette-strip" id="paletteStrip">
+        <!-- dynamically added color blocks here -->
+      </div>
+      <div class="palette-actions">
+        <button id="downloadCSS" title="Download CSS codes">
+          <i class="fas fa-file-code"></i> Download CSS
+        </button>
+        <button id="downloadImage" title="Download palette image">
+          <i class="fas fa-image"></i> Download Palette
+        </button>
+      </div>
+    </div>
+  </main>
+  <script src="index.js"></script>
+</body>
+</html>
