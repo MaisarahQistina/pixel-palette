@@ -7,8 +7,8 @@ PixelPalette is a web-based color palette extractor that extracts the main color
 - Convert uploaded image to a raster format to allow the program to access individual pixels and their RGB values [4].
 
 2. Convert Colors to LAB Space
-- RGB values represent colors as combinations of Red, Green, and Blue but this space is not perceptually uniform.
-- The project converts RGB to LAB color space:
+- RGB values represent colors as combinations of Red, Green, and Blue which may not be perceptually uniform.
+- The project converts RGB to LAB color space [4]:
   - L = lightness
   - A = green-red component
   - B = blue-yellow component
