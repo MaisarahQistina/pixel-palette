@@ -8,7 +8,7 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #df6722, #1f18a7);
+  background: linear-gradient(135deg, #045819, #1e6d33);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -35,7 +35,7 @@ main {
 .header p {
   font-size: 1rem;
   color: #f0f0f0;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 /* Upload Section */
@@ -43,7 +43,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .upload-label {
@@ -88,6 +88,21 @@ main {
 
 #colorCount {
   width: 150px;
+}
+
+.update-pallete {
+  border: none;
+  color: white;
+  background: #ffffff30;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.update-pallete:hover {
+  background: #ffffff50;
 }
 
 /* Palette Section */
@@ -149,4 +164,22 @@ main {
 
 .palette-actions button:hover {
   background: #ffffff50;
+}
+
+.palette-strip {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.color-block {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  text-shadow: 0 0 5px #000;
 }
