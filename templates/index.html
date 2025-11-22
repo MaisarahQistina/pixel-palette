@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelPalette</title>
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+  <main>
+    <div class="header">
+      <h1>Pixel Palette</h1>
+      <p>Upload an image to extract its main color palette.</p>
+    </div>
+
+    <div class="upload-section">
+      <label for="imageUpload" class="upload-label">
+          <i class="fas fa-upload"></i> Upload Image
+      </label>
+      <input type="file" id="imageUpload" accept="image/*">
+      <div class="preview-wrapper hidden" id="previewWrapper">
+          <img id="preview" src="" alt="Image Preview" class="preview">
+      </div>
+    </div>
+
+    <div class="controls">
+      <label for="colorCount">Number of Colors:</label>
+      <input type="range" id="colorCount" min="1" max="6" value="4">
+      <span id="colorValue">4</span>
+      <button id="updatePalette" class="update-pallete">Update Palette</button>
+    </div>
+
+    <div class="palette-section hidden" id="paletteSection">
+      <div class="palette-strip" id="paletteStrip"></div>
+      <div class="palette-actions">
+        <button id="downloadCSS"><i class="fas fa-file-code"></i> Download CSS</button>
+        <button id="downloadImage"><i class="fas fa-image"></i> Download Palette</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const imageInput = document.getElementById("imageUpload");
+    const preview = document.getElementById("preview");
+    const wrapper = document.getElementById("previewWrapper");
+    const colorCount = document.getElementById("colorCount");
+    const colorValue = document.getElementById("colorValue");
+    const updateButton = document.getElementById("updatePalette");
+    const paletteStrip = document.getElementById("paletteStrip");
+    const paletteSection = document.getElementById("paletteSection");
+    const downloadCSS = document.getElementById("downloadCSS");
+    const downloadImage = document.getElementById("downloadImage");
+
+    let uploadedFile = null; // store uploaded image
+
+    // Update slider display
+    colorCount.addEventListener("input", () => {
+      colorValue.textContent = colorCount.value;
+    });
+
+    // Upload image
+    imageInput.addEventListener("change", () => {
+      uploadedFile = imageInput.files[0];
+      if (!uploadedFile) return;
+
+      preview.src = URL.createObjectURL(uploadedFile);
+      wrapper.classList.remove("hidden");
+
+      extractPalette(uploadedFile, colorCount.value);
+    });
+
+    // Update palette when button clicked
+    updateButton.addEventListener("click", () => {
+      if (!uploadedFile) return;
+      extractPalette(uploadedFile, colorCount.value);
+    });
+
+    function extractPalette(file, k) {
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('k', k);
+
+      fetch('/extract_palette', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => renderPalette(data.palette))
+        .catch(err => console.error(err));
+    }
+
+    function renderPalette(palette) {
+      paletteStrip.innerHTML = '';
+      palette.forEach(color => {
+        const block = document.createElement('div');
+        block.className = 'color-block';
+        block.style.backgroundColor = color;
+        block.textContent = color;
+        paletteStrip.appendChild(block);
+      });
+      paletteSection.classList.remove('hidden');
+    }
+
+    // Download CSS
+    downloadCSS.addEventListener('click', () => {
+      if (!paletteStrip.children.length) return;
+      let cssContent = '';
+      Array.from(paletteStrip.children).forEach((block, i) => {
+        cssContent += `.color${i+1} { background-color: ${block.textContent}; }\n`;
+      });
+      const blob = new Blob([cssContent], { type: 'text/css' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'palette.css';
+      a.click();
+    });
+
+    // Download Palette Image with hex on top
+    downloadImage.addEventListener('click', () => {
+      if (!paletteStrip.children.length) return;
+      const blockWidth = 80;
+      const blockHeight = 80;
+      const width = blockWidth * paletteStrip.children.length;
+      const height = blockHeight;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+
+      Array.from(paletteStrip.children).forEach((block, i) => {
+        const color = block.textContent;
+
+        // Draw color block
+        ctx.fillStyle = color;
+        ctx.fillRect(i * blockWidth, 0, blockWidth, blockHeight);
+
+        // Determine text color (black/white)
+        const rgb = color.replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+        const brightness = (rgb[0]*299 + rgb[1]*587 + rgb[2]*114)/1000;
+        ctx.fillStyle = brightness > 125 ? '#000' : '#fff';
+
+        // Draw hex text centered
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(color, i*blockWidth + blockWidth/2, blockHeight/2);
+      });
+
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'palette.png';
+      link.click();
+    });
+  </script>
+</body>
+</html>
