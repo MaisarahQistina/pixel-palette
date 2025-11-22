@@ -17,11 +17,16 @@
     </div>
 
     <div class="upload-section">
-      <label for="imageUpload" class="upload-label">
-        <i class="fas fa-upload"></i> Choose an Image
-      </label>
-      <input type="file" id="imageUpload" accept="image/*">
-      <img id="preview" src="" alt="Image Preview" class="preview hidden">
+    <label for="imageUpload" class="upload-label">
+        <i class="fas fa-upload"></i>
+        Upload Image
+    </label>
+
+    <input type="file" id="imageUpload" accept="image/*">
+
+    <div class="preview-wrapper hidden" id="previewWrapper">
+        <img id="preview" src="" alt="Image Preview" class="preview">
+    </div>
     </div>
 
     <div class="controls">
@@ -45,6 +50,28 @@
       </div>
     </div>
   </main>
-  <script src="index.js"></script>
+
+  <script>
+    // Image Preview
+    document.getElementById("imageUpload").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const preview = document.getElementById("preview");
+    const wrapper = document.getElementById("previewWrapper");
+
+    preview.src = URL.createObjectURL(file);
+    wrapper.classList.remove("hidden");
+    });
+
+    // Color Slider
+    const colorCount = document.getElementById("colorCount");
+    const colorValue = document.getElementById("colorValue");
+    
+    colorCount.addEventListener("input", () => {
+        colorValue.textContent = colorCount.value;
+    });
+  </script>
+
 </body>
 </html>
